@@ -1,10 +1,24 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 import { signOut } from '../utils/auth';
+import { useAuth } from '../utils/context/authContext';
+import { getCategories } from '../api/categoryData';
 
 export default function NavBar() {
+  const [categories, setCategories] = useState([]);
+
+  const { user } = useAuth();
+
+  const getAllTheCategories = () => {
+    getCategories(user.uid).then(setCategories);
+  };
+
+  useEffect(() => {
+    getAllTheCategories();
+  }, [user]);
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -18,6 +32,11 @@ export default function NavBar() {
             <Link className="nav-link" href="/">
               Home
             </Link>
+            <div>
+              {categories.map((category) => (
+                <Link key={category.uid} categoryObj={category} onUpdate={getAllTheCategories} />
+              ))}
+            </div>
           </Nav>
 
           <Button variant="danger" onClick={signOut}>

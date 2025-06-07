@@ -1,11 +1,11 @@
-import { clientCredentials } from '../utils/client';
+// import { clientCredentials } from '../utils/client';
 
-const endpoint = clientCredentials.databaseURL;
+const endpoint = 'https://localhost:7127';
 
 // GET Users Categories
 const getCategories = (uid) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/api/categories.json?orderBy="uid"&equalTo="${uid}"`, {
+    fetch(`${endpoint}/api/categories?uid=${uid}"`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ const createCategory = (payload) =>
 // UPDATE Category
 const updateCategory = (payload) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/api/categories/${payload.id}.json`, {
+    fetch(`${endpoint}/api/categories/${payload.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
