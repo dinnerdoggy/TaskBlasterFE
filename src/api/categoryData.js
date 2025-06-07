@@ -22,7 +22,7 @@ const getCategories = (uid) =>
       .catch(reject);
   });
 
-// Get Single Category by Id & Uid
+// GET Single Category by Id & Uid
 const getSingleCategory = (id, uid) =>
   new Promise((resolve, reject) => {
     fetch(`${endpoint}/api/categories/${id}?uid=${uid}`, {
@@ -36,4 +36,48 @@ const getSingleCategory = (id, uid) =>
       .catch(reject);
   });
 
-export { getCategories, getSingleCategory };
+// CREATE Category
+const createCategory = (payload) =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}/api/categories`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => response.json())
+      .then((data) => resolve(data))
+      .catch(reject);
+  });
+
+// UPDATE Category
+const updateCategory = (payload) =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}/api/categories/${payload.id}.json`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => response.json())
+      .then((data) => resolve(data))
+      .catch(reject);
+  });
+
+// DELETE Category
+const deleteCategory = (id, uid) =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}/api/categories/${id}?uid=${uid}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => resolve(data))
+      .catch(reject);
+  });
+
+export { getCategories, getSingleCategory, createCategory, updateCategory, deleteCategory };
