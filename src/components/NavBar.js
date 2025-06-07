@@ -16,7 +16,9 @@ export default function NavBar() {
   };
 
   useEffect(() => {
-    getAllTheCategories();
+    if (user?.uid) {
+      getAllTheCategories();
+    }
   }, [user]);
 
   return (
@@ -34,7 +36,7 @@ export default function NavBar() {
             </Link>
             <div>
               {categories.map((category) => (
-                <Link key={category.uid} categoryObj={category} onUpdate={getAllTheCategories} />
+                <Link key={category.id} categoryObj={category} onUpdate={getAllTheCategories} />
               ))}
             </div>
           </Nav>
