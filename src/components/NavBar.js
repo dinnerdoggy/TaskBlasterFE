@@ -31,14 +31,15 @@ export default function NavBar() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             {/* CLOSE NAVBAR ON LINK SELECTION: https://stackoverflow.com/questions/72813635/collapse-on-select-react-bootstrap-navbar-with-nextjs-not-working */}
-            <Link className="nav-link" href="/">
-              Home
-            </Link>
-            <div>
-              {categories.map((category) => (
-                <Link key={category.id} categoryObj={category} onUpdate={getAllTheCategories} />
-              ))}
-            </div>
+            {categories.map((category) => (
+              <Link
+                key={category.id}
+                href={`/categories/${category.id}`} // assuming you're routing by ID
+                className="nav-link"
+              >
+                {category.title}
+              </Link>
+            ))}
           </Nav>
 
           <Button variant="danger" onClick={signOut}>

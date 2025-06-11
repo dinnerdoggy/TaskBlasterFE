@@ -5,7 +5,7 @@ const endpoint = 'https://localhost:7127';
 // GET Users Categories
 const getCategories = (uid) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/api/categories?uid=${uid}"`, {
+    fetch(`${endpoint}/api/categories?uid=${uid}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
