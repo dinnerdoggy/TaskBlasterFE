@@ -32,7 +32,7 @@ export default function SidebarNav() {
       </Button>
 
       {/* Offcanvas Sidebar */}
-      <Offcanvas show={show} onHide={handleClose} placement="start" backdrop={false}>
+      <Offcanvas show={show} onHide={handleClose} placement="start" backdrop={false} data-bs-theme="dark">
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Task Blaster</Offcanvas.Title>
         </Offcanvas.Header>
