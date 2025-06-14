@@ -1,35 +1,47 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { useRouter } from 'next/navigation';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useAuth } from '../../utils/context/authContext';
 import { getCategories } from '../../api/categoryData';
 import { getResources } from '../../api/resourceData';
-import { createDuty } from '../../api/dutyData';
+import { createDuty, updateDuty } from '../../api/dutyData';
 
-function DutyForm() {
+const initialState = {
+  title: '',
+  description: '',
+  priority: 'Low',
+  categoryId: '',
+  isCompleted: false,
+};
+
+function DutyForm({ obj = initialState }) {
   const router = useRouter();
   const { user } = useAuth();
 
-  const [formInput, setFormInput] = useState({
-    title: '',
-    description: '',
-    priority: 'Low',
-    categoryId: '',
-    isCompleted: false,
-  });
-
+  const [formInput, setFormInput] = useState(initialState);
   const [categories, setCategories] = useState([]);
   const [resources, setResources] = useState([]);
   const [selectedResourceIds, setSelectedResourceIds] = useState([]);
 
   useEffect(() => {
+    if (obj?.id) {
+      setFormInput({
+        title: obj.title || '',
+        description: obj.description || '',
+        priority: obj.priority || 'Low',
+        categoryId: obj.categoryId?.toString() || '',
+        isCompleted: obj.isCompleted || false,
+      });
+      setSelectedResourceIds(obj.resources?.map((res) => res.id) || []);
+    }
+
     getCategories(user.uid).then(setCategories);
     getResources(user.uid).then(setResources);
-  }, [user.uid]);
+  }, [obj, user.uid]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -49,12 +61,18 @@ function DutyForm() {
       resources: selectedResourceIds.map((id) => ({ id })),
     };
 
-    createDuty(payload, user.uid).then(() => router.push('/duties'));
+    if (obj?.id) {
+      // Update mode
+      updateDuty({ ...payload, id: obj.id }).then(() => router.push('/duties'));
+    } else {
+      // Create mode
+      createDuty(payload, user.uid).then(() => router.push('/duties'));
+    }
   };
 
   return (
     <Form onSubmit={handleSubmit} className="text-start mx-auto" style={{ maxWidth: '600px' }}>
-      <h1 className="text-center mb-4">Create a New Task</h1>
+      <h1 className="text-center mb-4">{obj.id ? 'Update Task' : 'Create a New Task'}</h1>
 
       <Form.Group className="mb-3">
         <Form.Label>Title</Form.Label>
@@ -90,19 +108,32 @@ function DutyForm() {
       <Form.Group className="mb-3">
         <Form.Label>Resources</Form.Label>
         {resources.map((res) => (
-          <Form.Check key={res.id} type="checkbox" label={res.name} checked={selectedResourceIds.includes(res.id)} onChange={() => handleCheckbox(res.id)} />
+          <Form.Check key={res.id} type="checkbox" label={res.title} checked={selectedResourceIds.includes(res.id)} onChange={() => handleCheckbox(res.id)} />
         ))}
       </Form.Group>
 
       <Button variant="primary" type="submit">
-        Create Duty
+        {obj.id ? 'Update Task' : 'Create Task'}
       </Button>
     </Form>
   );
 }
 
 DutyForm.propTypes = {
-  // optional props if refactored to support edit mode later
+  obj: PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    priority: PropTypes.string,
+    categoryId: PropTypes.number,
+    isCompleted: PropTypes.bool,
+    resources: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.string,
+      }),
+    ),
+  }),
 };
 
 export default DutyForm;

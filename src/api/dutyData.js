@@ -2,6 +2,21 @@
 
 const endpoint = 'https://localhost:7127';
 
+// GET Single Duty
+const getSingleDuty = (id, uid) =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}/api/duties/${id}.json`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        uid,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => resolve(data))
+      .catch(reject);
+  });
+
 // GET Duties by Category
 const getDutiesByCat = (id, uid) =>
   new Promise((resolve, reject) => {
@@ -34,12 +49,13 @@ const createDuty = (payload, uid) =>
   });
 
 // UPDATE Duty
-const updateDuty = (payload) =>
+const updateDuty = (payload, uid) =>
   new Promise((resolve, reject) => {
     fetch(`${endpoint}/api/duties/${payload.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
+        uid,
       },
       body: JSON.stringify(payload),
     })
@@ -62,4 +78,4 @@ const deleteDuty = (id, uid) =>
       .catch(reject);
   });
 
-export { getDutiesByCat, createDuty, updateDuty, deleteDuty };
+export { getSingleDuty, getDutiesByCat, createDuty, updateDuty, deleteDuty };
