@@ -20,7 +20,6 @@ DutyCard.propTypes = {
     isCompleted: PropTypes.bool,
     dueDate: PropTypes.instanceOf(Date),
   }).isRequired,
-  // onUpdate: PropTypes.func.isRequired,
 };
 
 export default DutyCard;
