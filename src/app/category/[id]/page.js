@@ -5,12 +5,14 @@ import PropTypes from 'prop-types';
 import { getDutiesByCat } from '../../../api/dutyData';
 import DutyCard from '../../../components/DutyCard';
 import { useAuth } from '../../../utils/context/authContext';
+import { getSingleCategory } from '../../../api/categoryData';
 
 function DutyByCategoryPage({ params }) {
   // Destructure category ID from dynamic route params
   const { id } = params;
   const { user } = useAuth();
   const [duties, setDuties] = useState([]);
+  const [category, setCategory] = useState('...Loading');
 
   // Create a function to fetch duties by category
   const getAllDutiesByCategory = () => {
@@ -20,6 +22,14 @@ function DutyByCategoryPage({ params }) {
     });
   };
 
+  const getCurrentCategory = () => {
+    getSingleCategory(id, user.uid).then(setCategory);
+  };
+
+  useEffect(() => {
+    getCurrentCategory();
+  }, []);
+
   // Call function when component mounts or when ID changes
   useEffect(() => {
     getAllDutiesByCategory();
@@ -27,7 +37,7 @@ function DutyByCategoryPage({ params }) {
 
   return (
     <div className="text-center my-4">
-      <h1 className="mb-4">Duties in This Category</h1>
+      <h1 className="mb-4">{category.title}</h1>
       <div className="mainPage d-flex flex-wrap justify-content-center">
         {/* map over duties here using DutyCard component */}
         {duties.map((duty) => (

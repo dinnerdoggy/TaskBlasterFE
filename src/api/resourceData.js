@@ -2,10 +2,10 @@
 
 const endpoint = 'https://localhost:7127';
 
-// GET Single Duty
-const getSingleDuty = (id, uid) =>
+// GET Resources by Category
+const getResources = (uid) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/api/duties/${id}.json`, {
+    fetch(`${endpoint}/api/Resources`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -17,25 +17,10 @@ const getSingleDuty = (id, uid) =>
       .catch(reject);
   });
 
-// GET Duties by Category
-const getDutiesByCat = (id, uid) =>
+// CREATE Resource
+const createResource = (payload, uid) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/api/duties/category/${id}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        uid,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => resolve(data))
-      .catch(reject);
-  });
-
-// CREATE Duty
-const createDuty = (payload, uid) =>
-  new Promise((resolve, reject) => {
-    fetch(`${endpoint}/api/duties`, {
+    fetch(`${endpoint}/api/Resources`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -48,14 +33,13 @@ const createDuty = (payload, uid) =>
       .catch(reject);
   });
 
-// UPDATE Duty
-const updateDuty = (payload, uid) =>
+// UPDATE Resource
+const updateResource = (payload) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/api/duties/${payload.id}`, {
+    fetch(`${endpoint}/api/Resources/${payload.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        uid,
       },
       body: JSON.stringify(payload),
     })
@@ -64,10 +48,10 @@ const updateDuty = (payload, uid) =>
       .catch(reject);
   });
 
-// DELETE Duty
-const deleteDuty = (id, uid) =>
+// DELETE Resource
+const deleteResource = (id, uid) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/api/duties/${id}?uid=${uid}`, {
+    fetch(`${endpoint}/api/Resources/${id}?uid=${uid}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -78,4 +62,4 @@ const deleteDuty = (id, uid) =>
       .catch(reject);
   });
 
-export { getSingleDuty, getDutiesByCat, createDuty, updateDuty, deleteDuty };
+export { getResources, createResource, updateResource, deleteResource };
