@@ -3,12 +3,13 @@
 const endpoint = 'https://localhost:7127';
 
 // GET Duties by Category
-const getDutiesByCat = (id) =>
+const getDutiesByCat = (id, uid) =>
   new Promise((resolve, reject) => {
     fetch(`${endpoint}/api/duties/category/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        uid,
       },
     })
       .then((response) => response.json())

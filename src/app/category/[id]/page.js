@@ -4,17 +4,17 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { getDutiesByCat } from '../../../api/dutyData';
 import DutyCard from '../../../components/DutyCard';
+import { useAuth } from '../../../utils/context/authContext';
 
 function DutyByCategoryPage({ params }) {
   // Destructure category ID from dynamic route params
   const { id } = params;
-
-  // Set state for duties
+  const { user } = useAuth();
   const [duties, setDuties] = useState([]);
 
   // Create a function to fetch duties by category
   const getAllDutiesByCategory = () => {
-    getDutiesByCat(id).then((data) => {
+    getDutiesByCat(id, user.uid).then((data) => {
       console.log('API call response: ', data);
       setDuties(data);
     });
