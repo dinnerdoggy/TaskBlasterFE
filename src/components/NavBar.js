@@ -39,10 +39,10 @@ export default function SidebarNav() {
         <Offcanvas.Body>
           <nav className="d-flex flex-column gap-2">
             <Link href="/" className="nav-link" onClick={handleClose}>
-              Home
+              Front Page
             </Link>
             {categories.map((category) => (
-              <Link key={category.id} href={`/categories/${category.id}`} className="nav-link" onClick={handleClose}>
+              <Link key={category.id} href={`/category/${category.id}`} className="nav-link" onClick={handleClose}>
                 {category.title}
               </Link>
             ))}
