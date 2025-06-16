@@ -5,15 +5,20 @@ const endpoint = 'https://localhost:7127';
 // GET Single Duty
 const getSingleDuty = (id, uid) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/api/duties/${id}.json`, {
+    fetch(`${endpoint}/api/duties/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
         uid,
       },
     })
-      .then((response) => response.json())
-      .then((data) => resolve(data))
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Failed to fetch duty with id ${id}`);
+        }
+        return response.json();
+      })
+      .then(resolve)
       .catch(reject);
   });
 
