@@ -26,11 +26,11 @@ function DutyCard({ dutyObj, onUpdate }) {
   };
 
   return (
-    <Card style={{ width: '18rem' }}>
+    <Card style={{ width: '24rem' }}>
       <Card.Body>
         <Dropdown align="end">
           <Dropdown.Toggle variant="link" bsPrefix="p-0 border-0 btn" id="ellipsis-dropdown">
-            <BsThreeDotsVertical size={20} />
+            <BsThreeDotsVertical className="elipsis" size={20} />
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
@@ -44,10 +44,38 @@ function DutyCard({ dutyObj, onUpdate }) {
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
-        <Card.Title>{dutyObj.title}</Card.Title>
+        <Card.Title className="taskTitle">{dutyObj.title}</Card.Title>
         <hr />
-        <Card.Subtitle className="mb-2 text-muted">{dutyObj.dueDate}</Card.Subtitle>
         <Card.Text>{dutyObj.description}</Card.Text>
+        {/* <div>
+            <strong>Comments:</strong>
+            <ul className="resource-list">
+              {dutyObj.comments.map((com) => (
+                <li key={com.id}>{com.content}</li>
+              ))}
+            </ul>
+          </div> */}
+        {dutyObj.resources?.length > 0 && (
+          <div>
+            <strong>Resources:</strong>
+            <ul className="resource-list">
+              {dutyObj.resources.map((res) => (
+                <li key={res.id}>{res.title}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {dutyObj.dueDate && (
+          <Card.Subtitle className="priorityStatus">
+            <span>Due:</span>{' '}
+            {new Date(dutyObj.dueDate).toLocaleDateString('en-US', {
+              month: 'long',
+              day: 'numeric',
+            })}
+          </Card.Subtitle>
+        )}
+
+        <p className="priorityStatus">Priority: {dutyObj.priority}</p>
       </Card.Body>
     </Card>
   );
@@ -59,7 +87,10 @@ DutyCard.propTypes = {
     title: PropTypes.string,
     description: PropTypes.string,
     isCompleted: PropTypes.bool,
+    priority: PropTypes.string,
     dueDate: PropTypes.instanceOf(Date),
+    comments: PropTypes.shape(),
+    resources: PropTypes.shape(),
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };

@@ -1,4 +1,108 @@
+@font-face {
+    font-family: 'PencilantScript';
+    src: url('/fonts/PencilantScript.otf') format('opentype');
+
+    font-weight: normal;
+    font-style: normal;
+  }
+
 body {
-  background: black;
+  background-image: url(https://media.istockphoto.com/id/522279843/vector/green-chalkboard-background.jpg?s=612x612&w=0&k=20&c=1UF9HKAOi7U2pAcSIn_77mtW2bFSrRQo40QDL8z5H-A=);
   color: white;
+  background-size: cover;
+  background-position: right;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: white;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+.glass-card {
+  width: 240px;
+  height: 360px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 20px 10px rgba(255, 255, 255, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+}
+
+.glass-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.8),
+    transparent,
+    rgba(255, 255, 255, 0.3)
+  );
+}
+
+.categoryTitle {
+  text-align: center;
+  margin-top: 4rem;
+  font-family: 'PencilantScript', cursive;
+  font-size: 3rem;
+}
+
+.mainPage {
+  display: block;
+}
+
+.elipsis {
+  color: black;
+}
+
+.priorityStatus {
+  text-align: end;
+  font-size: .75rem;
+  color: gray;
+}
+
+.card {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+}
+
+.taskTitle {
+  text-align: center;
+  font-weight: bold;
+}
+
+.card-text {
+  text-align: start;
+}
+
+.dropdown {
+  display: flex;
+  justify-content: end;
+  align-items: center;
 }

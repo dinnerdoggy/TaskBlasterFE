@@ -36,9 +36,9 @@ function DutyByCategoryPage({ params }) {
   }, [id]);
 
   return (
-    <div className="text-center my-4">
-      <h1 className="mb-4">{category.title}</h1>
-      <div className="mainPage d-flex flex-wrap justify-content-center">
+    <div className="dutiesPage">
+      <h1 className="mb-4 categoryTitle">{category.title}</h1>
+      <div className="mainPage">
         {/* map over duties here using DutyCard component */}
         {duties.map((duty) => (
           <DutyCard key={duty.id} dutyObj={duty} onUpdate={getAllDutiesByCategory} />
