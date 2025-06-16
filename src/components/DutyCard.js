@@ -47,6 +47,14 @@ function DutyCard({ dutyObj, onUpdate }) {
         <Card.Title className="taskTitle">{dutyObj.title}</Card.Title>
         <hr />
         <Card.Text>{dutyObj.description}</Card.Text>
+        {/* <div>
+            <strong>Comments:</strong>
+            <ul className="resource-list">
+              {dutyObj.comments.map((com) => (
+                <li key={com.id}>{com.content}</li>
+              ))}
+            </ul>
+          </div> */}
         {dutyObj.resources?.length > 0 && (
           <div>
             <strong>Resources:</strong>
@@ -57,12 +65,16 @@ function DutyCard({ dutyObj, onUpdate }) {
             </ul>
           </div>
         )}
-        <Card.Subtitle className="mb-2 text-muted">
-          {new Date(dutyObj.dueDate).toLocaleDateString('en-US', {
-            month: 'long',
-            day: 'numeric',
-          })}
-        </Card.Subtitle>
+        {dutyObj.dueDate && (
+          <Card.Subtitle className="priorityStatus">
+            <span>Due:</span>{' '}
+            {new Date(dutyObj.dueDate).toLocaleDateString('en-US', {
+              month: 'long',
+              day: 'numeric',
+            })}
+          </Card.Subtitle>
+        )}
+
         <p className="priorityStatus">Priority: {dutyObj.priority}</p>
       </Card.Body>
     </Card>
@@ -77,6 +89,7 @@ DutyCard.propTypes = {
     isCompleted: PropTypes.bool,
     priority: PropTypes.string,
     dueDate: PropTypes.instanceOf(Date),
+    comments: PropTypes.shape(),
     resources: PropTypes.shape(),
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
