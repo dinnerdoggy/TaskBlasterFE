@@ -57,15 +57,22 @@ const createDuty = (payload, uid) =>
 const updateDuty = (payload, uid) =>
   new Promise((resolve, reject) => {
     fetch(`${endpoint}/api/duties/${payload.id}`, {
-      method: 'PATCH',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         uid,
       },
       body: JSON.stringify(payload),
     })
-      .then((response) => response.json())
-      .then((data) => resolve(data))
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Failed to update duty. Status: ${response.status}`);
+        }
+
+        // Only parse JSON if body exists
+        return response.status === 200 ? null : response.json();
+      })
+      .then(resolve)
       .catch(reject);
   });
 
