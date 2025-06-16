@@ -5,15 +5,20 @@ const endpoint = 'https://localhost:7127';
 // GET Single Duty
 const getSingleDuty = (id, uid) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/api/duties/${id}.json`, {
+    fetch(`${endpoint}/api/duties/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
         uid,
       },
     })
-      .then((response) => response.json())
-      .then((data) => resolve(data))
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Failed to fetch duty with id ${id}`);
+        }
+        return response.json();
+      })
+      .then(resolve)
       .catch(reject);
   });
 
@@ -52,29 +57,47 @@ const createDuty = (payload, uid) =>
 const updateDuty = (payload, uid) =>
   new Promise((resolve, reject) => {
     fetch(`${endpoint}/api/duties/${payload.id}`, {
-      method: 'PATCH',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         uid,
       },
       body: JSON.stringify(payload),
     })
-      .then((response) => response.json())
-      .then((data) => resolve(data))
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Failed to update duty. Status: ${response.status}`);
+        }
+
+        // Only parse JSON if body exists
+        return response.status === 200 ? null : response.json();
+      })
+      .then(resolve)
       .catch(reject);
   });
 
 // DELETE Duty
 const deleteDuty = (id, uid) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/api/duties/${id}?uid=${uid}`, {
+    fetch(`${endpoint}/api/duties/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
+        uid,
       },
     })
-      .then((response) => response.json())
-      .then((data) => resolve(data))
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Failed to delete duty. Status: ${response.status}`);
+        }
+
+        // If 204 No Content, don't try to parse JSON
+        if (response.status === 204) {
+          resolve(); // no body to parse
+        } else {
+          response.json().then(resolve).catch(reject);
+        }
+      })
       .catch(reject);
   });
 

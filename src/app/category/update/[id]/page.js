@@ -4,16 +4,18 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { getSingleDuty } from '@/api/dutyData';
 import DutyForm from '@/components/forms/DutyForm';
+import { useAuth } from '../../../../utils/context/authContext';
 
 export default function UpdateDutyPage({ params }) {
-  const [editItem, setEditItem] = useState({});
-  const { id } = params; // assuming the dynamic route is [id]
+  const [editItem, setEditItem] = useState(null);
+  const { id } = params;
+  const { user } = useAuth();
 
   useEffect(() => {
-    getSingleDuty(id).then(setEditItem);
+    getSingleDuty(id, user.uid).then(setEditItem);
   }, [id]);
 
-  return <DutyForm obj={editItem} />;
+  return editItem ? <DutyForm obj={editItem} /> : <div>Loading...</div>;
 }
 
 UpdateDutyPage.propTypes = {
