@@ -5,13 +5,21 @@ import { useRouter } from 'next/navigation';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import Dropdown from 'react-bootstrap/Dropdown';
+import { deleteDuty } from '../api/dutyData';
+import { useAuth } from '../utils/context/authContext';
 
-const onDelete = () => {
-  console.log('Delete clicked');
-};
-
-function DutyCard({ dutyObj }) {
+function DutyCard({ dutyObj, onUpdate }) {
   const router = useRouter();
+
+  const { user } = useAuth();
+
+  const handleDelete = () => {
+    if (window.confirm('Are you sure you want to delete this task?')) {
+      deleteDuty(dutyObj.id, user.uid).then(() => {
+        onUpdate();
+      });
+    }
+  };
 
   const handleEdit = () => {
     router.push(`/category/update/${dutyObj.id}`);
@@ -30,7 +38,7 @@ function DutyCard({ dutyObj }) {
               <FaEdit className="me-2" />
               Edit
             </Dropdown.Item>
-            <Dropdown.Item onClick={onDelete}>
+            <Dropdown.Item onClick={handleDelete}>
               <FaTrash className="me-2 text-danger" />
               Delete
             </Dropdown.Item>
@@ -53,6 +61,7 @@ DutyCard.propTypes = {
     isCompleted: PropTypes.bool,
     dueDate: PropTypes.instanceOf(Date),
   }).isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };
 
 export default DutyCard;
