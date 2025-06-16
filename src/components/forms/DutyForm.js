@@ -16,6 +16,7 @@ const initialState = {
   priority: 'Low',
   categoryId: '',
   isCompleted: false,
+  dueDate: '',
 };
 
 function DutyForm({ obj = initialState }) {
@@ -35,6 +36,7 @@ function DutyForm({ obj = initialState }) {
         priority: obj.priority || 'Low',
         categoryId: obj.categoryId?.toString() || '',
         isCompleted: obj.isCompleted || false,
+        dueDate: obj.dueDate?.split('T')[0] || '',
       });
       setSelectedResourceIds(obj.resources?.map((res) => res.id) || []);
     }
@@ -58,6 +60,7 @@ function DutyForm({ obj = initialState }) {
       ...formInput,
       categoryId: Number(formInput.categoryId),
       uid: user.uid,
+      dueDate: formInput.dueDate ? new Date(formInput.dueDate).toISOString() : null,
       resources: selectedResourceIds.map((id) => ({ id })),
     };
 
@@ -103,6 +106,11 @@ function DutyForm({ obj = initialState }) {
             </option>
           ))}
         </Form.Select>
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label>Due Date</Form.Label>
+        <Form.Control type="date" name="dueDate" value={formInput.dueDate} onChange={handleChange} />
       </Form.Group>
 
       <Form.Group className="mb-3">

@@ -44,10 +44,26 @@ function DutyCard({ dutyObj, onUpdate }) {
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
-        <Card.Title>{dutyObj.title}</Card.Title>
+        <Card.Title className="taskTitle">{dutyObj.title}</Card.Title>
         <hr />
-        <Card.Subtitle className="mb-2 text-muted">{dutyObj.dueDate}</Card.Subtitle>
         <Card.Text>{dutyObj.description}</Card.Text>
+        {dutyObj.resources?.length > 0 && (
+          <div>
+            <strong>Resources:</strong>
+            <ul className="resource-list">
+              {dutyObj.resources.map((res) => (
+                <li key={res.id}>{res.title}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+        <Card.Subtitle className="mb-2 text-muted">
+          {new Date(dutyObj.dueDate).toLocaleDateString('en-US', {
+            month: 'long',
+            day: 'numeric',
+          })}
+        </Card.Subtitle>
+        <p className="priorityStatus">Priority: {dutyObj.priority}</p>
       </Card.Body>
     </Card>
   );
@@ -59,7 +75,9 @@ DutyCard.propTypes = {
     title: PropTypes.string,
     description: PropTypes.string,
     isCompleted: PropTypes.bool,
+    priority: PropTypes.string,
     dueDate: PropTypes.instanceOf(Date),
+    resources: PropTypes.shape(),
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
