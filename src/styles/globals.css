@@ -2,3 +2,36 @@ body {
   background: black;
   color: white;
 }
+
+.dutiesPage {
+  background-color: black;
+}
+
+.categoryTitle {
+  text-align: center;
+  margin-top: 4rem;
+}
+
+.mainPage {
+  display: block;
+}
+
+.elipsis {
+  color: black;
+}
+
+.card {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+}
+
+.card-text {
+  text-align: start;
+}
+
+.dropdown {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}

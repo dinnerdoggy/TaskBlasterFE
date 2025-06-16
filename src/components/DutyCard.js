@@ -26,11 +26,11 @@ function DutyCard({ dutyObj, onUpdate }) {
   };
 
   return (
-    <Card style={{ width: '18rem' }}>
+    <Card style={{ width: '24rem' }}>
       <Card.Body>
         <Dropdown align="end">
           <Dropdown.Toggle variant="link" bsPrefix="p-0 border-0 btn" id="ellipsis-dropdown">
-            <BsThreeDotsVertical size={20} />
+            <BsThreeDotsVertical className="elipsis" size={20} />
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
