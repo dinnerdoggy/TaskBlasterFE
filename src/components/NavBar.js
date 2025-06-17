@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -32,7 +33,7 @@ export default function SidebarNav() {
       </Button>
 
       {/* Offcanvas Sidebar */}
-      <Offcanvas show={show} onHide={handleClose} placement="start" backdrop={false} data-bs-theme="dark">
+      <Offcanvas show={show} onHide={handleClose} placement="start" backdrop={false} className="whiteBoard">
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Task Blaster</Offcanvas.Title>
         </Offcanvas.Header>
@@ -46,9 +47,9 @@ export default function SidebarNav() {
                 {category.title}
               </Link>
             ))}
-            <Button variant="danger" onClick={signOut}>
+            <button className="eraser" onClick={signOut}>
               Sign Out
-            </Button>
+            </button>
           </nav>
         </Offcanvas.Body>
       </Offcanvas>
