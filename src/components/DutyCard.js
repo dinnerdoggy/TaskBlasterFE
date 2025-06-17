@@ -26,7 +26,7 @@ function DutyCard({ dutyObj, onUpdate }) {
   };
 
   return (
-    <Card style={{ width: '24rem' }}>
+    <Card className="taskCard">
       <Card.Body>
         <Dropdown align="end">
           <Dropdown.Toggle variant="link" bsPrefix="p-0 border-0 btn" id="ellipsis-dropdown">

@@ -51,13 +51,13 @@ body {
 }
 
 .elipsis {
-  color: black;
+  color: beige;
 }
 
 .priorityStatus {
   text-align: end;
-  font-size: .75rem;
-  color: gray;
+  font-size: .80rem;
+  color: bisque;
 }
 
 .card {
@@ -65,6 +65,20 @@ body {
   margin-right: auto;
   margin-top: .5rem;
   margin-bottom: .5rem;
+}
+
+.taskCard {
+  width: 36rem;
+  font-size: 1.75rem;
+  background: none;
+  font-family: 'PencilantScript', cursive;
+  color: white;
+  border: none;
+  /* border: 5px, solid, white;
+  border-radius: 0;
+  border-left: none;
+  border-top: none;
+  border-right: none; */
 }
 
 .taskTitle {
