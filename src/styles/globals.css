@@ -31,7 +31,6 @@ body {
   background-size: cover;
   background-position: right;
   background-repeat: no-repeat;
-  background-attachment: fixed;
   border: none;
   border-radius: 4px;
   color: beige;
@@ -39,11 +38,25 @@ body {
   font-size: 2rem;
 }
 
+.eraserSubmit {
+  background-image: url(/images/eraserbg.png);
+  background-size: cover;
+  background-position: right;
+  background-repeat: no-repeat;
+  border: none;
+  border-radius: 4px;
+  color: beige;
+  width: 8rem;
+  font-size: 1rem;
+  text-wrap: nowrap;
+  margin-bottom: 5rem;
+}
+
 .categoryTitle {
   text-align: center;
   margin-top: 4rem;
   font-family: 'PencilantScript', cursive;
-  font-size: 3rem;
+  font-size: 4rem;
 }
 
 .mainPage {
@@ -74,16 +87,21 @@ body {
   font-family: 'PencilantScript', cursive;
   color: white;
   border: none;
-  /* border: 5px, solid, white;
-  border-radius: 0;
-  border-left: none;
-  border-top: none;
-  border-right: none; */
+}
+
+.formField {
+  width: 36rem;
+  font-size: 1.5rem;
+  background: none;
+  font-family: 'PencilantScript', cursive;
+  color: white;
+  border: none;
+  resize: none;
 }
 
 .taskTitle {
   text-align: center;
-  font-weight: bold;
+  font-size: 3rem;
 }
 
 .card-text {
