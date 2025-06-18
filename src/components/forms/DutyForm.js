@@ -90,18 +90,26 @@ function DutyForm({ obj = initialState }) {
       <Form.Group className="taskCard">
         <Form.Label>Priority</Form.Label>
         <Form.Select name="priority" className="formField" value={formInput.priority} onChange={handleChange}>
-          <option value="Low">Low</option>
-          <option value="Normal">Medium</option>
-          <option value="High">High</option>
+          <option style={{ color: 'black' }} value="Low">
+            Low
+          </option>
+          <option style={{ color: 'black' }} value="Normal">
+            Medium
+          </option>
+          <option style={{ color: 'black' }} value="High">
+            High
+          </option>
         </Form.Select>
       </Form.Group>
 
       <Form.Group className="taskCard">
         <Form.Label>Category</Form.Label>
         <Form.Select name="categoryId" className="formField" value={formInput.categoryId} onChange={handleChange} required>
-          <option value="">Select a category</option>
+          <option style={{ color: 'black' }} value="">
+            Select a category
+          </option>
           {categories.map((cat) => (
-            <option key={cat.id} value={cat.id}>
+            <option style={{ color: 'black' }} key={cat.id} value={cat.id}>
               {cat.title}
             </option>
           ))}

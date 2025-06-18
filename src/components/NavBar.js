@@ -28,7 +28,7 @@ export default function SidebarNav() {
   return (
     <>
       {/* Sidebar Toggle Button */}
-      <Button variant="dark" onClick={handleShow} className="position-fixed top-0 start-0 m-3" style={{ zIndex: 1051 }}>
+      <Button variant="dark" onClick={handleShow} className="eraserSubmit position-fixed top-0 start-0 m-3" style={{ zIndex: 1051 }}>
         ☰ Categories
       </Button>
 
