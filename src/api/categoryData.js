@@ -46,12 +46,13 @@ const createCategory = (payload) =>
   });
 
 // UPDATE Category
-const updateCategory = (payload) =>
+const updateCategory = (payload, uid) =>
   new Promise((resolve, reject) => {
     fetch(`${endpoint}/api/categories/${payload.id}`, {
-      method: 'PATCH',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        uid,
       },
       body: JSON.stringify(payload),
     })
