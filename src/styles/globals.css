@@ -52,6 +52,21 @@ body {
   margin-bottom: 5rem;
 }
 
+.eraserCreate {
+  background-image: url(/images/eraserbg.png);
+  background-size: cover;
+  background-position: right;
+  background-repeat: no-repeat;
+  border: none;
+  border-radius: 4px;
+  color: beige;
+  width: 8rem;
+  font-size: 1rem;
+  text-wrap: nowrap;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .categoryTitle {
   text-align: center;
   margin-top: 4rem;
