@@ -40,7 +40,7 @@ function CategoryForm({ obj = initialState }) {
 
     if (obj.id) {
       // Update mode
-      updateCategory({ ...payload, id: obj.id }).then(() => router.push('/'));
+      updateCategory({ ...payload, id: obj.id }, user.uid).then(() => router.push('/'));
     } else {
       // Create mode
       createCategory(payload).then(() => router.push('/'));
@@ -57,7 +57,7 @@ function CategoryForm({ obj = initialState }) {
       </Form.Group>
 
       <Button className="eraserSubmit" type="submit">
-        {obj.id ? 'Update Category' : 'Create Category'}
+        {obj.id ? 'Edit' : 'Submit'}
       </Button>
     </Form>
   );

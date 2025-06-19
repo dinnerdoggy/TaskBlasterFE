@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Button, Offcanvas } from 'react-bootstrap';
+import { BsFillPlusSquareFill } from 'react-icons/bs';
 import { signOut } from '../utils/auth';
 import { useAuth } from '../utils/context/authContext';
 import { getCategories } from '../api/categoryData';
@@ -29,7 +30,7 @@ export default function SidebarNav() {
     <>
       {/* Sidebar Toggle Button */}
       <Button variant="dark" onClick={handleShow} className="eraserSubmit position-fixed top-0 start-0 m-3" style={{ zIndex: 1051 }}>
-        ☰ Categories
+        ☰
       </Button>
 
       {/* Offcanvas Sidebar */}
@@ -41,6 +42,10 @@ export default function SidebarNav() {
           <nav className="d-flex flex-column gap-2">
             <Link href="/" className="nav-link" onClick={handleClose}>
               Front Page
+            </Link>
+            <hr style={{ backgroundcolor: 'black', width: '80%' }} />
+            <Link className="nav-link" href="/catFormPages/new">
+              <BsFillPlusSquareFill onClick={handleClose} />
             </Link>
             {categories.map((category) => (
               <Link key={category.id} href={`/category/${category.id}`} className="nav-link" onClick={handleClose}>
