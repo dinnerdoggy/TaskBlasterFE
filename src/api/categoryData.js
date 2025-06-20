@@ -70,8 +70,17 @@ const deleteCategory = (id, uid) =>
         'Content-Type': 'application/json',
       },
     })
-      .then((response) => response.json())
-      .then((data) => resolve(data))
+      // eslint-disable-next-line consistent-return
+      .then(async (response) => {
+        if (!response.ok) throw new Error('Failed to delete category');
+
+        // If 204 No Content, there's nothing to parse
+        const text = await response.text();
+        if (!text) return resolve(); // all good, nothing returned
+
+        const data = JSON.parse(text);
+        resolve(data);
+      })
       .catch(reject);
   });
 

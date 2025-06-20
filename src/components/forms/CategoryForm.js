@@ -40,7 +40,7 @@ function CategoryForm({ obj = initialState }) {
 
     if (obj.id) {
       // Update mode
-      updateCategory({ ...payload, id: obj.id }).then(() => router.push('/'));
+      updateCategory({ ...payload, id: obj.id }, user.uid).then(() => router.push('/'));
     } else {
       // Create mode
       createCategory(payload).then(() => router.push('/'));
@@ -49,7 +49,7 @@ function CategoryForm({ obj = initialState }) {
 
   return (
     <Form onSubmit={handleSubmit} className="text-start mx-auto" style={{ maxWidth: '600px' }}>
-      <h1 className="categoryTitle">{obj.id ? 'Update Category' : 'Create a New Category'}</h1>
+      <h1 className="categoryTitle">{obj.id ? 'Edit Category' : 'Create a New Category'}</h1>
 
       <Form.Group className="taskCard">
         <Form.Label>Title</Form.Label>
@@ -57,7 +57,7 @@ function CategoryForm({ obj = initialState }) {
       </Form.Group>
 
       <Button className="eraserSubmit" type="submit">
-        {obj.id ? 'Update Category' : 'Create Category'}
+        {obj.id ? 'Edit' : 'Submit'}
       </Button>
     </Form>
   );
