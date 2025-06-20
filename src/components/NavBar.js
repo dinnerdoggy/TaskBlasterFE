@@ -4,11 +4,13 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Button, Offcanvas } from 'react-bootstrap';
 import { BsFillPlusSquareFill } from 'react-icons/bs';
+import { BiEdit, BiTrash } from 'react-icons/bi';
+import PropTypes from 'prop-types';
 import { signOut } from '../utils/auth';
 import { useAuth } from '../utils/context/authContext';
-import { getCategories } from '../api/categoryData';
+import { deleteCategory, getCategories } from '../api/categoryData';
 
-export default function SidebarNav() {
+export default function SidebarNav({ onUpdate }) {
   const [categories, setCategories] = useState([]);
   const [show, setShow] = useState(false);
   const { user } = useAuth();
@@ -25,6 +27,13 @@ export default function SidebarNav() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleDelete = (cat) => {
+    if (window.confirm('Are you sure you want to delete this category?')) {
+      deleteCategory(cat.id, user.uid).then(() => {
+        onUpdate();
+      });
+    }
+  };
 
   return (
     <>
@@ -39,17 +48,21 @@ export default function SidebarNav() {
           <Offcanvas.Title>Task Blaster</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <nav className="d-flex flex-column gap-2">
+          <nav className="fitBoard d-flex flex-column gap-1">
             <Link href="/" className="nav-link" onClick={handleClose}>
               Front Page
             </Link>
             <hr style={{ backgroundcolor: 'black', width: '80%' }} />
             <Link className="nav-link" href="/catFormPages/new">
-              <BsFillPlusSquareFill onClick={handleClose} />
+              <BsFillPlusSquareFill className="addBtn" onClick={handleClose} />
             </Link>
             {categories.map((category) => (
               <Link key={category.id} href={`/category/${category.id}`} className="nav-link" onClick={handleClose}>
                 {category.title}
+                <Link className="nav-link editBtn" href={`/catFormPages/update/${category.id}`}>
+                  <BiEdit className="addBtn" onClick={handleClose} />
+                </Link>
+                <BiTrash className="addBtn deleteBtn" onClick={() => handleDelete(category)} />
               </Link>
             ))}
             <button className="eraser" onClick={signOut}>
@@ -61,3 +74,10 @@ export default function SidebarNav() {
     </>
   );
 }
+
+SidebarNav.propTypes = {
+  catObj: PropTypes.shape({
+    id: PropTypes.number,
+  }),
+  onUpdate: PropTypes.func.isRequired,
+};

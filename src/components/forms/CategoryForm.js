@@ -49,7 +49,7 @@ function CategoryForm({ obj = initialState }) {
 
   return (
     <Form onSubmit={handleSubmit} className="text-start mx-auto" style={{ maxWidth: '600px' }}>
-      <h1 className="categoryTitle">{obj.id ? 'Update Category' : 'Create a New Category'}</h1>
+      <h1 className="categoryTitle">{obj.id ? 'Edit Category' : 'Create a New Category'}</h1>
 
       <Form.Group className="taskCard">
         <Form.Label>Title</Form.Label>

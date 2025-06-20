@@ -36,6 +36,9 @@ body {
   color: beige;
   width: 10rem;
   font-size: 2rem;
+  align-self: center;
+  margin-top: auto;
+  margin-bottom: 1rem;
 }
 
 .eraserSubmit {
@@ -67,11 +70,31 @@ body {
   margin-right: auto;
 }
 
+.nav-link {
+  width: fit-content;
+  display: flex;
+}
+
+.editBtn {
+  justify-content: end;
+  align-items: center;
+  margin-left: 1rem;
+}
+
+.addBtn {
+  width: 1.5rem;
+  margin-top: none;
+}
+
 .categoryTitle {
   text-align: center;
   margin-top: 4rem;
   font-family: 'PencilantScript', cursive;
   font-size: 4rem;
+}
+
+.fitBoard {
+  height: 100%;
 }
 
 .mainPage {
