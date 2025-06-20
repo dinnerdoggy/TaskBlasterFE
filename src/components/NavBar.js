@@ -10,7 +10,7 @@ import { signOut } from '../utils/auth';
 import { useAuth } from '../utils/context/authContext';
 import { deleteCategory, getCategories } from '../api/categoryData';
 
-export default function SidebarNav({ onUpdate }) {
+export default function SidebarNav() {
   const [categories, setCategories] = useState([]);
   const [show, setShow] = useState(false);
   const { user } = useAuth();
@@ -28,9 +28,9 @@ export default function SidebarNav({ onUpdate }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleDelete = (cat) => {
-    if (window.confirm('Are you sure you want to delete this category?')) {
+    if (window.confirm(`Are you sure you want to delete the "${cat.title}" category?`)) {
       deleteCategory(cat.id, user.uid).then(() => {
-        onUpdate();
+        getAllTheCategories();
       });
     }
   };
@@ -56,15 +56,23 @@ export default function SidebarNav({ onUpdate }) {
             <Link className="nav-link" href="/catFormPages/new">
               <BsFillPlusSquareFill className="addBtn" onClick={handleClose} />
             </Link>
-            {categories.map((category) => (
-              <Link key={category.id} href={`/category/${category.id}`} className="nav-link" onClick={handleClose}>
-                {category.title}
-                <Link className="nav-link editBtn" href={`/catFormPages/update/${category.id}`}>
-                  <BiEdit className="addBtn" onClick={handleClose} />
-                </Link>
-                <BiTrash className="addBtn deleteBtn" onClick={() => handleDelete(category)} />
-              </Link>
-            ))}
+            {categories
+              .filter((category) => category.title !== null)
+              .map((category) => (
+                <div key={category.id} className="d-flex justify-content-between align-items-center">
+                  <Link href={`/category/${category.id}`} className="nav-link" onClick={handleClose}>
+                    {category.title}
+                  </Link>
+                  <div className="d-flex gap-2">
+                    <Link href={`/catFormPages/update/${category.id}`} className="nav-link editBtn" onClick={handleClose}>
+                      <BiEdit className="addBtn" />
+                    </Link>
+                    <Button type="button" className="btn btn-link p-0" onClick={() => handleDelete(category)} style={{ textDecoration: 'none' }}>
+                      <BiTrash className="addBtn deleteBtn" />
+                    </Button>
+                  </div>
+                </div>
+              ))}
             <button className="eraser" onClick={signOut}>
               Sign Out
             </button>
@@ -79,5 +87,4 @@ SidebarNav.propTypes = {
   catObj: PropTypes.shape({
     id: PropTypes.number,
   }),
-  onUpdate: PropTypes.func.isRequired,
 };
