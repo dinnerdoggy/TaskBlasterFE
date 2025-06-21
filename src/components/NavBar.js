@@ -6,6 +6,7 @@ import { Button, Offcanvas } from 'react-bootstrap';
 import { BsFillPlusSquareFill } from 'react-icons/bs';
 import { BiEdit, BiTrash } from 'react-icons/bi';
 import PropTypes from 'prop-types';
+import { usePathname } from 'next/navigation';
 import { signOut } from '../utils/auth';
 import { useAuth } from '../utils/context/authContext';
 import { deleteCategory, getCategories } from '../api/categoryData';
@@ -14,6 +15,7 @@ export default function SidebarNav() {
   const [categories, setCategories] = useState([]);
   const [show, setShow] = useState(false);
   const { user } = useAuth();
+  const pathName = usePathname();
 
   const getAllTheCategories = () => {
     getCategories(user.uid).then(setCategories);
@@ -23,7 +25,7 @@ export default function SidebarNav() {
     if (user?.uid) {
       getAllTheCategories();
     }
-  }, [user]);
+  }, [user, pathName]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -67,9 +69,7 @@ export default function SidebarNav() {
                     <Link href={`/catFormPages/update/${category.id}`} className="nav-link editBtn" onClick={handleClose}>
                       <BiEdit className="addBtn" />
                     </Link>
-                    <Button type="button" className="btn btn-link p-0" onClick={() => handleDelete(category)} style={{ textDecoration: 'none' }}>
-                      <BiTrash className="addBtn deleteBtn" />
-                    </Button>
+                    <BiTrash className="addBtn deleteBtn" onClick={() => handleDelete(category)} style={{ textDecoration: 'none' }} />
                   </div>
                 </div>
               ))}

@@ -73,6 +73,7 @@ body {
 .nav-link {
   width: fit-content;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .editBtn {
@@ -84,6 +85,10 @@ body {
 .addBtn {
   width: 1.5rem;
   margin-top: none;
+}
+
+.deleteBtn {
+  margin-right: 1.5rem;
 }
 
 .categoryTitle {
