@@ -28,33 +28,27 @@ function DutyCard({ dutyObj, onUpdate }) {
   return (
     <Card className="taskCard">
       <Card.Body>
-        <Dropdown align="end">
-          <Dropdown.Toggle variant="link" bsPrefix="p-0 border-0 btn" id="ellipsis-dropdown">
-            <BsThreeDotsVertical className="elipsis" size={20} />
-          </Dropdown.Toggle>
+        <Card.Title className="taskTitle">
+          {dutyObj.title}
 
-          <Dropdown.Menu>
-            <Dropdown.Item onClick={handleEdit}>
-              <FaEdit className="me-2" />
-              Edit
-            </Dropdown.Item>
-            <Dropdown.Item onClick={handleDelete}>
-              <FaTrash className="me-2 text-danger" />
-              Delete
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-        <Card.Title className="taskTitle">{dutyObj.title}</Card.Title>
+          <Dropdown align="center">
+            <Dropdown.Toggle variant="link" bsPrefix="p-0 border-0 btn" id="ellipsis-dropdown">
+              <BsThreeDotsVertical className="elipsis" size={20} />
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={handleEdit}>
+                <FaEdit className="me-2" />
+                Edit
+              </Dropdown.Item>
+              <Dropdown.Item onClick={handleDelete}>
+                <FaTrash className="me-2 text-danger" />
+                Delete
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </Card.Title>
         <hr />
         <Card.Text>{dutyObj.description}</Card.Text>
-        {/* <div>
-            <strong>Comments:</strong>
-            <ul className="resource-list">
-              {dutyObj.comments.map((com) => (
-                <li key={com.id}>{com.content}</li>
-              ))}
-            </ul>
-          </div> */}
         {dutyObj.resources?.length > 0 && (
           <div>
             <strong>Resources:</strong>
