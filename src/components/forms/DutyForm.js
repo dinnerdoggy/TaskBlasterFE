@@ -60,7 +60,7 @@ function DutyForm({ obj = initialState }) {
       ...formInput,
       categoryId: Number(formInput.categoryId),
       uid: user.uid,
-      dueDate: formInput.dueDate ? new Date(formInput.dueDate).toISOString() : null,
+      dueDate: formInput.dueDate ? new Date(new Date(formInput.dueDate).setDate(new Date(formInput.dueDate).getDate() + 1)).toISOString() : null,
       resources: selectedResourceIds.map((id) => ({ id })),
     };
 
