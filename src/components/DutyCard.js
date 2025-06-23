@@ -54,7 +54,11 @@ function DutyCard({ dutyObj, onUpdate }) {
             <strong>Resources:</strong>
             <ul className="resource-list">
               {dutyObj.resources.map((res) => (
-                <li key={res.id}>{res.title}</li>
+                <li key={res.id}>
+                  <a className="linkColor" href={res.url} target="_blank" rel="noopener noreferrer">
+                    {res.title}
+                  </a>
+                </li>
               ))}
             </ul>
           </div>
