@@ -54,6 +54,9 @@ export default function SidebarNav() {
             <Link href="/" className="nav-link" onClick={handleClose}>
               Front Page
             </Link>
+            <Link href="/resources" className="nav-link" onClick={handleClose}>
+              Resources
+            </Link>
             <hr style={{ backgroundcolor: 'black', width: '80%' }} />
             <Link className="nav-link" href="/catFormPages/new">
               <BsFillPlusSquareFill className="addBtn" onClick={handleClose} />
