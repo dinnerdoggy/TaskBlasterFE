@@ -158,3 +158,12 @@ body {
   justify-content: end;
   align-items: center;
 }
+
+.resources {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.border {
+  border: 5px, dashed, beige;
+}

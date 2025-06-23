@@ -18,10 +18,13 @@ export default function RecourcesPage() {
   }, []);
 
   return (
-    <div>
-      {resources.map((res) => (
-        <ResourceCard key={res.id} resource={res} onUpdate={getAllTheRecources} />
-      ))}
-    </div>
+    <>
+      <h1 className="categoryTitle">Resources</h1>
+      <div className="resources">
+        {resources.map((res) => (
+          <ResourceCard key={res.id} resource={res} onUpdate={getAllTheRecources} />
+        ))}
+      </div>
+    </>
   );
 }

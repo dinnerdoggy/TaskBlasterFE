@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 
 function ResourceCard({ resource, onEdit, onDelete }) {
   return (
-    <Card style={{ width: '18rem' }} className="mb-3">
+    <Card style={{ width: '18rem' }} className="taskCard border">
       <Card.Body>
         <Card.Title>{resource.title}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">{resource.type}</Card.Subtitle>
