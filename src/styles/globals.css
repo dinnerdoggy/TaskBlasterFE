@@ -177,3 +177,7 @@ body {
 .border {
   border: 5px, dashed, beige;
 }
+
+.linkColor {
+  color: aqua;
+}
