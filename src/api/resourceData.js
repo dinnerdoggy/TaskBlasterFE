@@ -17,6 +17,26 @@ const getResources = (uid) =>
       .catch(reject);
   });
 
+// GET Single Resource
+const getSingleResource = (id, uid) =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}/api/resources/${id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        uid,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Failed to fetch resource with id ${id}`);
+        }
+        return response.json();
+      })
+      .then(resolve)
+      .catch(reject);
+  });
+
 // CREATE Resource
 const createResource = (payload, uid) =>
   new Promise((resolve, reject) => {
@@ -34,12 +54,13 @@ const createResource = (payload, uid) =>
   });
 
 // UPDATE Resource
-const updateResource = (payload) =>
+const updateResource = (payload, uid) =>
   new Promise((resolve, reject) => {
     fetch(`${endpoint}/api/Resources/${payload.id}`, {
-      method: 'PATCH',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        uid,
       },
       body: JSON.stringify(payload),
     })
@@ -73,4 +94,4 @@ const deleteResource = (id, uid) =>
       .catch(reject);
   });
 
-export { getResources, createResource, updateResource, deleteResource };
+export { getResources, getSingleResource, createResource, updateResource, deleteResource };

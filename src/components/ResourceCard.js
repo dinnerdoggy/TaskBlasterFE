@@ -22,7 +22,7 @@ function ResourceCard({ resourceObj, onUpdate }) {
   };
 
   const handleEdit = () => {
-    router.push(`/resource/update/${resourceObj.id}`);
+    router.push(`/resources/update/${resourceObj.id}`);
   };
 
   return (

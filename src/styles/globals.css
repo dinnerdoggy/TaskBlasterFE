@@ -164,6 +164,16 @@ body {
   flex-wrap: wrap;
 }
 
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.toTheRight {
+  margin-left: 1.5rem;
+}
+
 .border {
   border: 5px, dashed, beige;
 }

@@ -45,9 +45,9 @@ function ResourceForm({ obj = initialState }) {
     };
 
     if (obj.id) {
-      updateResource({ ...payload, id: obj.id }, user.uid).then(() => router.push('/'));
+      updateResource({ ...payload, id: obj.id }, user.uid).then(() => router.push('/resources'));
     } else {
-      createResource(payload, user.uid).then(() => router.push('/'));
+      createResource(payload, user.uid).then(() => router.push('/resources'));
     }
   };
 
