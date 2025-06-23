@@ -55,10 +55,21 @@ const deleteResource = (id, uid) =>
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
+        uid,
       },
     })
-      .then((response) => response.json())
-      .then((data) => resolve(data))
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Failed to delete resource. Status: ${response.status}`);
+        }
+
+        // If 204 No Content, don't try to parse JSON
+        if (response.status === 204) {
+          resolve(); // no body to parse
+        } else {
+          response.json().then(resolve).catch(reject);
+        }
+      })
       .catch(reject);
   });
 

@@ -1,47 +1,76 @@
 'use client';
 
-import React from 'react';
-import PropTypes from 'prop-types';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+import PropTypes from 'prop-types';
+import { useRouter } from 'next/navigation';
+import { BsThreeDotsVertical } from 'react-icons/bs';
+import { FaEdit, FaTrash } from 'react-icons/fa';
+import Dropdown from 'react-bootstrap/Dropdown';
+import { deleteResource } from '../api/resourceData';
+import { useAuth } from '../utils/context/authContext';
 
-function ResourceCard({ resource, onEdit, onDelete }) {
+function ResourceCard({ resourceObj, onUpdate }) {
+  const router = useRouter();
+  const { user } = useAuth();
+
+  const handleDelete = () => {
+    if (window.confirm('Are you sure you want to delete this resource?')) {
+      deleteResource(resourceObj.id, user.uid).then(() => {
+        onUpdate();
+      });
+    }
+  };
+
+  const handleEdit = () => {
+    router.push(`/resource/update/${resourceObj.id}`);
+  };
+
   return (
     <Card style={{ width: '18rem' }} className="taskCard border">
       <Card.Body>
-        <Card.Title>{resource.title}</Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">{resource.type}</Card.Subtitle>
-        <Card.Text>{resource.description}</Card.Text>
+        <Card.Title className="taskTitle">
+          {resourceObj.title}
 
-        {resource.url && (
-          <Card.Link href={resource.url} target="_blank" rel="noopener noreferrer">
+          <Dropdown align="center">
+            <Dropdown.Toggle variant="link" bsPrefix="p-0 border-0 btn" id="ellipsis-dropdown">
+              <BsThreeDotsVertical className="elipsis" size={20} />
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={handleEdit}>
+                <FaEdit className="me-2" />
+                Edit
+              </Dropdown.Item>
+              <Dropdown.Item onClick={handleDelete}>
+                <FaTrash className="me-2 text-danger" />
+                Delete
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </Card.Title>
+
+        <hr />
+        <Card.Subtitle className="mb-2 text-muted">{resourceObj.type}</Card.Subtitle>
+        <Card.Text>{resourceObj.description}</Card.Text>
+
+        {resourceObj.url && (
+          <Card.Link href={resourceObj.url} target="_blank" rel="noopener noreferrer">
             Visit Resource
           </Card.Link>
         )}
-
-        <div className="mt-3 d-flex justify-content-between">
-          <Button variant="primary" onClick={() => onEdit(resource)}>
-            Edit
-          </Button>
-          <Button variant="danger" onClick={() => onDelete(resource.id)}>
-            Delete
-          </Button>
-        </div>
       </Card.Body>
     </Card>
   );
 }
 
 ResourceCard.propTypes = {
-  resource: PropTypes.shape({
+  resourceObj: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string,
     description: PropTypes.string,
     type: PropTypes.string,
     url: PropTypes.string,
   }).isRequired,
-  onEdit: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };
 
 export default ResourceCard;

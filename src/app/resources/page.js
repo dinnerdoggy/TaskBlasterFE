@@ -22,7 +22,7 @@ export default function RecourcesPage() {
       <h1 className="categoryTitle">Resources</h1>
       <div className="resources">
         {resources.map((res) => (
-          <ResourceCard key={res.id} resource={res} onUpdate={getAllTheRecources} />
+          <ResourceCard key={res.id} resourceObj={res} onUpdate={getAllTheRecources} />
         ))}
       </div>
     </>
