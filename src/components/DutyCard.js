@@ -2,13 +2,18 @@
 import Card from 'react-bootstrap/Card';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/navigation';
+import { BiCommentAdd } from 'react-icons/bi';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import Dropdown from 'react-bootstrap/Dropdown';
+import { useEffect, useState } from 'react';
 import { deleteDuty } from '../api/dutyData';
 import { useAuth } from '../utils/context/authContext';
+import CommentCard from './CommentCard';
+import { getCommentsByDutyId } from '../api/commentData';
 
 function DutyCard({ dutyObj, onUpdate }) {
+  const [comments, setComments] = useState([]);
   const router = useRouter();
 
   const { user } = useAuth();
@@ -25,6 +30,17 @@ function DutyCard({ dutyObj, onUpdate }) {
     router.push(`/category/update/${dutyObj.id}`);
   };
 
+  const getAllCommentsByDuty = () => {
+    getCommentsByDutyId(dutyObj.id, user.uid).then((data) => {
+      console.log('Comments call for useEffect:', data);
+      setComments(data);
+    });
+  };
+
+  useEffect(() => {
+    getAllCommentsByDuty();
+  }, []);
+
   return (
     <Card className="taskCard">
       <Card.Body>
@@ -36,6 +52,11 @@ function DutyCard({ dutyObj, onUpdate }) {
               <BsThreeDotsVertical className="elipsis" size={20} />
             </Dropdown.Toggle>
             <Dropdown.Menu>
+              <Dropdown.Item onClick={() => router.push(`/commentFormPages/new?dutyId=${dutyObj.id}`)}>
+                <BiCommentAdd className="me-2" />
+                Add Comment
+              </Dropdown.Item>
+
               <Dropdown.Item onClick={handleEdit}>
                 <FaEdit className="me-2" />
                 Edit
@@ -51,14 +72,11 @@ function DutyCard({ dutyObj, onUpdate }) {
         <Card.Text>{dutyObj.description}</Card.Text>
         {dutyObj.comments?.length > 0 && (
           <div>
-            <strong>Comments:</strong>
-            <ul className="resource-list">
-              {dutyObj.comments.map((com) => (
-                <li key={com.id}>
-                  <span>{com.content}</span>
-                </li>
-              ))}
-            </ul>
+            {comments.map((com) => (
+              <CommentCard key={com.id} commentObj={com} onUpdate={getAllCommentsByDuty}>
+                {com.content}
+              </CommentCard>
+            ))}
           </div>
         )}
         {dutyObj.resources?.length > 0 && (
