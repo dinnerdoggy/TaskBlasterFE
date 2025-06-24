@@ -22,7 +22,7 @@ function CommentCard({ commentObj, onUpdate }) {
   };
 
   const handleEdit = () => {
-    router.push(`/comments/update/${commentObj.id}`);
+    router.push(`/commentFormPages/update/${commentObj.id}`);
   };
 
   return (
@@ -36,11 +36,11 @@ function CommentCard({ commentObj, onUpdate }) {
             <Dropdown.Menu>
               <Dropdown.Item onClick={handleEdit}>
                 <FaEdit className="me-2" />
-                Edit
+                Edit Comment
               </Dropdown.Item>
               <Dropdown.Item onClick={handleDelete}>
                 <FaTrash className="me-2 text-danger" />
-                Delete
+                Delete Comment
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
