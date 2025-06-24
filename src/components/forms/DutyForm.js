@@ -66,10 +66,10 @@ function DutyForm({ obj = initialState }) {
 
     if (obj?.id) {
       // Update mode
-      updateDuty({ ...payload, id: obj.id }, user.uid).then(() => router.push('/'));
+      updateDuty({ ...payload, id: obj.id }, user.uid).then(() => router.push(`/category/${payload.categoryId}`));
     } else {
       // Create mode
-      createDuty(payload, user.uid).then(() => router.push('/'));
+      createDuty(payload, user.uid).then(() => router.push(`/category/${payload.categoryId}`));
     }
   };
 

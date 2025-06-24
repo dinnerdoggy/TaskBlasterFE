@@ -6,31 +6,29 @@ import { useRouter } from 'next/navigation';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { deleteResource } from '../api/resourceData';
+import { deleteComment } from '../api/commentData';
 import { useAuth } from '../utils/context/authContext';
 
-function ResourceCard({ resourceObj, onUpdate }) {
+function CommentCard({ commentObj, onUpdate }) {
   const router = useRouter();
   const { user } = useAuth();
 
   const handleDelete = () => {
-    if (window.confirm('Are you sure you want to delete this resource?')) {
-      deleteResource(resourceObj.id, user.uid).then(() => {
+    if (window.confirm('Are you sure you want to delete this comment?')) {
+      deleteComment(commentObj.id, user.uid).then(() => {
         onUpdate();
       });
     }
   };
 
   const handleEdit = () => {
-    router.push(`/resources/update/${resourceObj.id}`);
+    router.push(`/commentFormPages/update/${commentObj.id}`);
   };
 
   return (
-    <Card style={{ width: '18rem' }} className="taskCard border">
+    <Card className="taskCard border">
       <Card.Body>
         <Card.Title className="taskTitle">
-          {resourceObj.title}
-
           <Dropdown align="center">
             <Dropdown.Toggle variant="link" bsPrefix="p-0 border-0 btn" id="ellipsis-dropdown">
               <BsThreeDotsVertical className="elipsis" size={20} />
@@ -38,39 +36,40 @@ function ResourceCard({ resourceObj, onUpdate }) {
             <Dropdown.Menu>
               <Dropdown.Item onClick={handleEdit}>
                 <FaEdit className="me-2" />
-                Edit
+                Edit Comment
               </Dropdown.Item>
               <Dropdown.Item onClick={handleDelete}>
                 <FaTrash className="me-2 text-danger" />
-                Delete
+                Delete Comment
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </Card.Title>
+        <Card.Text>{commentObj.content}</Card.Text>
 
-        <hr />
-        <Card.Subtitle className="mb-2 text-muted">{resourceObj.type}</Card.Subtitle>
-        <Card.Text>{resourceObj.description}</Card.Text>
-
-        {resourceObj.url && (
-          <Card.Link className="linkColor" href={resourceObj.url} target="_blank" rel="noopener noreferrer">
-            Visit Resource
-          </Card.Link>
+        {commentObj.timeStamp && (
+          <Card.Subtitle className="mb-2 text-muted">
+            {new Date(commentObj.timeStamp).toLocaleString('en-US', {
+              month: 'long',
+              day: 'numeric',
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+            })}
+          </Card.Subtitle>
         )}
       </Card.Body>
     </Card>
   );
 }
 
-ResourceCard.propTypes = {
-  resourceObj: PropTypes.shape({
+CommentCard.propTypes = {
+  commentObj: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    title: PropTypes.string,
-    description: PropTypes.string,
-    type: PropTypes.string,
-    url: PropTypes.string,
+    content: PropTypes.string,
+    timeStamp: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
 
-export default ResourceCard;
+export default CommentCard;
