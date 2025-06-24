@@ -53,7 +53,7 @@ function ResourceCard({ resourceObj, onUpdate }) {
         <Card.Text>{resourceObj.description}</Card.Text>
 
         {resourceObj.url && (
-          <Card.Link href={resourceObj.url} target="_blank" rel="noopener noreferrer">
+          <Card.Link className="linkColor" href={resourceObj.url} target="_blank" rel="noopener noreferrer">
             Visit Resource
           </Card.Link>
         )}
