@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '../../utils/context/authContext';
 import { createComment, updateComment } from '../../api/commentData';
+import { getSingleDuty } from '../../api/dutyData';
 
 const initialState = {
   content: '',
@@ -37,22 +38,33 @@ function CommentForm({ obj = initialState }) {
     setFormInput((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const payload = {
       ...formInput,
       timeStamp: new Date().toISOString(),
     };
-    console.log('SUBMIT PAYLOAD:', payload);
+
+    const redirectAfter = async (dutyId) => {
+      const dutyData = await getSingleDuty(dutyId, user.uid);
+      if (dutyData?.categoryId) {
+        router.push(`/category/${dutyData.categoryId}`);
+      } else {
+        router.push('/'); // fallback
+      }
+    };
 
     if (obj.id) {
       // Update mode
-      updateComment({ ...payload, id: obj.id }, user.uid).then(() => router.push('/'));
+      updateComment({ ...payload, id: obj.id }, user.uid).then(() => {
+        redirectAfter(obj.dutyId);
+      });
     } else {
       // Create mode
-      createComment(payload, user.uid).then(() => router.push('/'));
-      console.log('SUBMIT PAYLOAD on Create:', payload);
+      createComment(payload, user.uid).then(() => {
+        redirectAfter(payload.dutyId);
+      });
     }
   };
 
