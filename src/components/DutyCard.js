@@ -71,7 +71,7 @@ function DutyCard({ dutyObj, onUpdate }) {
         <hr />
         <Card.Text>{dutyObj.description}</Card.Text>
         {dutyObj.comments?.length > 0 && (
-          <div>
+          <div className="flex">
             {comments.map((com) => (
               <CommentCard key={com.id} commentObj={com} onUpdate={getAllCommentsByDuty}>
                 {com.content}
