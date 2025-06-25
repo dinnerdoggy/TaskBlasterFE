@@ -168,6 +168,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .toTheRight {
@@ -180,4 +181,15 @@ body {
 
 .linkColor {
   color: aqua;
+}
+
+.commentCard {
+  background-image: url(/images/stickyNoteBG.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  width: 15rem;
+  height: 15rem;
 }

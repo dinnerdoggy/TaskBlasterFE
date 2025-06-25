@@ -26,7 +26,7 @@ function CommentCard({ commentObj, onUpdate }) {
   };
 
   return (
-    <Card className="taskCard border">
+    <Card className="commentCard">
       <Card.Body>
         <Card.Title className="taskTitle">
           <Dropdown align="center">
