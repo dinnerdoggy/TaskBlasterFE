@@ -4,6 +4,7 @@
 
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { firebase } from '@/utils/client';
+import { checkUserExists, registerUser } from '@/api/userData';
 
 const AuthContext = createContext();
 
@@ -18,13 +19,24 @@ function AuthProvider(props) {
   // an object/value = user is logged in
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged((fbUser) => {
+    const unregisterAuthObserver = firebase.auth().onAuthStateChanged(async (fbUser) => {
       if (fbUser) {
-        setUser(fbUser);
+        try {
+          const exists = await checkUserExists(fbUser.uid);
+          if (!exists) {
+            await registerUser(fbUser.uid);
+          }
+          setUser(fbUser);
+        } catch (err) {
+          console.error('Error syncing user with backend:', err);
+          setUser(false); // fallback to logged-out state on error
+        }
       } else {
-        setUser(false);
+        setUser(false); // user is not logged in
       }
-    }); // creates a single global listener for auth state changed
+    });
+
+    return () => unregisterAuthObserver(); // cleanup listener on unmount
   }, []);
 
   const value = useMemo(
