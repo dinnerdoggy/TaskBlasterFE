@@ -110,6 +110,14 @@ body {
   color: beige;
 }
 
+.elipsisBlack {
+  color: black;
+}
+
+.lastItem {
+  margin-left: auto;
+}
+
 .priorityStatus {
   text-align: end;
   font-size: .80rem;
@@ -192,4 +200,21 @@ body {
   border: none;
   width: 15rem;
   height: 15rem;
+}
+
+.clipBoard {
+  background-image: url(/images/clipBoardBG.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  width: 15rem;
+  height: 25rem;
+  padding-top: 4rem;
+  font-family: 'PencilantScript', cursive;
+}
+
+.clipTitle {
+  width: inherit;
 }

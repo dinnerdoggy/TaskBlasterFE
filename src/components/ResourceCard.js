@@ -26,14 +26,14 @@ function ResourceCard({ resourceObj, onUpdate }) {
   };
 
   return (
-    <Card style={{ width: '18rem' }} className="taskCard border">
+    <Card className="clipBoard">
       <Card.Body>
-        <Card.Title className="taskTitle">
+        <Card.Title className="flex">
           {resourceObj.title}
 
-          <Dropdown align="center">
+          <Dropdown className="lastItem" align="center">
             <Dropdown.Toggle variant="link" bsPrefix="p-0 border-0 btn" id="ellipsis-dropdown">
-              <BsThreeDotsVertical className="elipsis" size={20} />
+              <BsThreeDotsVertical className="elipsisBlack" size={20} />
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item onClick={handleEdit}>
@@ -50,10 +50,18 @@ function ResourceCard({ resourceObj, onUpdate }) {
 
         <hr />
         <Card.Subtitle className="mb-2 text-muted">{resourceObj.type}</Card.Subtitle>
-        <Card.Text>{resourceObj.description}</Card.Text>
+        <Card.Text
+          style={{
+            maxHeight: '10.5rem',
+            overflowY: 'auto',
+            paddingRight: '8px',
+          }}
+        >
+          {resourceObj.description}
+        </Card.Text>
 
         {resourceObj.url && (
-          <Card.Link className="linkColor" href={resourceObj.url} target="_blank" rel="noopener noreferrer">
+          <Card.Link href={resourceObj.url} target="_blank" rel="noopener noreferrer">
             Visit Resource
           </Card.Link>
         )}
