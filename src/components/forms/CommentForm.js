@@ -70,7 +70,7 @@ function CommentForm({ obj = initialState }) {
 
   return (
     <Form onSubmit={handleSubmit} className="text-start mx-auto" style={{ maxWidth: '600px' }}>
-      <h1 className="categoryTitle">{obj.id ? 'Edit Comment' : 'Add a New Comment'}</h1>
+      <h1 className="categoryTitle">{obj.id ? 'Edit Sticky Note' : 'Add a New Sticky Note'}</h1>
 
       <Form.Group className="taskCard">
         <Form.Label>Comment</Form.Label>
