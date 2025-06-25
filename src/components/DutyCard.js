@@ -54,7 +54,7 @@ function DutyCard({ dutyObj, onUpdate }) {
             <Dropdown.Menu>
               <Dropdown.Item onClick={() => router.push(`/commentFormPages/new?dutyId=${dutyObj.id}`)}>
                 <BiCommentAdd className="me-2" />
-                Add Comment
+                Add Sticky Note
               </Dropdown.Item>
 
               <Dropdown.Item onClick={handleEdit}>

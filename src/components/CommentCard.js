@@ -36,16 +36,24 @@ function CommentCard({ commentObj, onUpdate }) {
             <Dropdown.Menu>
               <Dropdown.Item onClick={handleEdit}>
                 <FaEdit className="me-2" />
-                Edit Comment
+                Edit Sticky Note
               </Dropdown.Item>
               <Dropdown.Item onClick={handleDelete}>
                 <FaTrash className="me-2 text-danger" />
-                Delete Comment
+                Delete Sticky Note
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </Card.Title>
-        <Card.Text>{commentObj.content}</Card.Text>
+        <Card.Text
+          style={{
+            maxHeight: '9.5rem',
+            overflowY: 'auto',
+            paddingRight: '8px',
+          }}
+        >
+          {commentObj.content}
+        </Card.Text>
 
         {commentObj.timeStamp && (
           <Card.Subtitle className="mb-2 text-muted">
