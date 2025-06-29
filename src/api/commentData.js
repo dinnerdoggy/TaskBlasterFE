@@ -1,4 +1,6 @@
-const endpoint = 'https://localhost:7127';
+import { clientCredentials } from '../utils/client';
+
+const endpoint = clientCredentials.databaseURL;
 
 // GET Single Comment
 const getSingleComment = (id, uid) =>

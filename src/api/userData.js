@@ -1,4 +1,6 @@
-const endpoint = 'https://localhost:7127';
+import { clientCredentials } from '../utils/client';
+
+const endpoint = clientCredentials.databaseURL;
 
 export const checkUserExists = async (uid) => {
   const res = await fetch(`${endpoint}/api/users/checkuser/${uid}`);
