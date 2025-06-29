@@ -1,6 +1,6 @@
-// import { clientCredentials } from '../utils/client';
+import { clientCredentials } from '../utils/client';
 
-const endpoint = 'https://localhost:7127';
+const endpoint = clientCredentials.databaseURL;
 
 // GET Single Duty
 const getSingleDuty = (id, uid) =>
