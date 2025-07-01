@@ -218,3 +218,7 @@ body {
 .clipTitle {
   width: inherit;
 }
+
+.bigLogo {
+  margin-bottom: 3rem;
+}
