@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import Image from 'react-bootstrap/Image';
 import { signIn } from '../utils/auth';
 
 function Signin() {
@@ -13,7 +14,7 @@ function Signin() {
         margin: '0 auto',
       }}
     >
-      <h1 className="categoryTitle">Welcome to TaskBlaster!</h1>
+      <Image className="bigLogo" src="/images/TBLogo.png" />
       <Button type="button" size="lg" className="eraserCreate" onClick={signIn}>
         Sign In
       </Button>
