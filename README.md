@@ -1,61 +1,54 @@
-# NextJS with Firebase Auth App Router Template
+# TaskBlaster [![Netlify Status](https://api.netlify.com/api/v1/badges/YOUR-NETLIFY-BADGE/deploy-status)](https://app.netlify.com/sites/YOUR-NETLIFY-SITE/deploys)
 
-[See Live Demo of this Template](https://drt-next-js-template-app-router.netlify.app/)
+## Overview
+TaskBlaster is a clean, user-focused to-do app built with React, Next.js, C#, .NET, Entity Framework Core, and PostGresSQL. Users can securely log in with Firebase Authentication, organize their Tasks by category and priority, manage resources and comments (sticky notes), and get stuff done—fast.
 
-## Topics
-- [Get Started](#get-started)
-- [Starting the Project](#starting-the-project)
-- [Deploying on Netlify](#deploying-on-netlify)
-___
-## Getting Started
-### Use Template
-#### 1. To get started, click the GREEN "Use this Template" button at the top of the repo
-<img width="915" alt="Screen Shot 2022-07-06 at 12 54 01 PM" src="https://user-images.githubusercontent.com/29741570/177612998-4aac9237-5a1e-4f13-8ae0-468587521564.png">
+[View App Here](https://taskblaster.netlify.app/)
 
-#### 2. Make sure YOUR github account is selected in the dropdown and name your project
-<img width="763" alt="Screen Shot 2022-07-06 at 12 54 48 PM" src="https://user-images.githubusercontent.com/29741570/177613126-dd38f678-7553-4f27-8a4a-75680f14d71e.png">
+## About the User
+- **Ideal User**: Perfect for busy individuals who need a streamlined way to manage, prioritize, and categorize their daily tasks and responsibilities.
 
-#### 3. Clone your new repo to your local machine
-#### 4. Go to the **NEXT** section
+## Features
+- **Firebase Authentication**: Log in securely using Google.
+- **View Tasks**: Browse a categorized and prioritized list of all your tasks.
+- **Add Tasks**: Easily create new tasks with titles, priorities, and categories.
+- **Edit Tasks**: Make changes to your tasks at any time.
+- **Delete Tasks**: Remove Tasks that are no longer needed.
+- **Category Management**: Add, edit, and delete categories to keep your tasks organized.
+- **Resource Management**: Link reusable resources (like guides, docs, links) to tasks.
+- **Comment System**: Add thoughts or context to any duty.
+- **Dark Mode**: Toggle a persistent dark mode across the app.
+- Categories, tasks, comments, and resources can all be created, edited, and deleted.
 
-## Starting the Project
-1. Create a Firebase project and set up authentication. Use [these videos](https://vimeo.com/showcase/codetracker-firebase) as a refresher if needed.
-1. Create a `.env` file at the root of the project
-1. Copy/Paste the contents of the `.env.sample` file to your newly created `.env` file.
-1. Copy over all of your Firebase values into the `.env` file.
-1. Open the `package.json` file and change the `name` property to the name of your application, and `author` to  your name.
-1. From your command line, be in the root directory and run `npm install` OR `npm i` for short.
-1. Next, run `npm run prepare`. This command sets up husky to track eslint errors on commit that will make your deploy fail on Netlify.
-1. Run `npx eslint . --ext .js,.jsx`
-1. To start your application, run `npm run dev`. THIS IS THE COMMAND YOU WILL USE TO RUN YOUR DEVELOPMENT SERVER FROM NOW ON.
-1. Open [http://localhost:3000](http://localhost:3000) with your browser.
+## Screenshots
+### Login
+![image](https://github.com/user-attachments/assets/c2fbb778-07bc-4d54-a800-ef774a2eb8ee)
 
-### If you see this, you are set to go!
-<img width="450" alt="Screen Shot 2022-07-06 at 1 07 27 PM" src="https://github.com/user-attachments/assets/deae25f0-01d5-44b4-be60-7297b0f6f0ef">
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### View & Organize Tasks
+![image](https://github.com/user-attachments/assets/5df7450a-3cb0-42e5-acbc-0a7a5626be63)
 
-**NOTES:** 
-- If you see the following error, you did not follow all the setup steps correctly and failed to add your Firebase creds. Go back and do that NOW.
 
-<img width="1043" alt="Screen Shot 2022-07-06 at 11 18 45 AM" src="https://user-images.githubusercontent.com/29741570/177612501-c2628f18-4bbd-4de9-aae6-27ffba1172d6.png">
+### Forms for CRUD
+#### All four forms are used for create and edit, and change dynamically for use case.
+![image](https://github.com/user-attachments/assets/8c03fa22-9c72-4ce3-b939-1ac34bc55c26)
+![image](https://github.com/user-attachments/assets/a1cfdfa0-0bec-40c9-a522-95818df2bd7a)
+![image](https://github.com/user-attachments/assets/e151dad5-1e10-4e95-8cd6-ccdac21f5629)
+![image](https://github.com/user-attachments/assets/7c2acf10-5fbb-4245-954e-aec40def72df)
 
-### Deploying on Netlify
-Netlify will automatically detect your project and prepopulate the settings, but should something go wrong and it does not, here are the commands:
 
-- Build Command: `npm run build`
-- Publish directory: `.next`
 
-#### Additional Steps to Take on Netlify
-- Add Environmental Variables
-    - Any Enviromental variables you are using in your `.env` file should be added to Netlify. 
-        - Go to Site settings > Build & deploy > Environment > Environment variables and the keys and values there if you did not add them when you were deploying your site
 
-- Update Firebase URL Settings
-    - In Firebase under Authentication select sign in methods, scroll to Authorized domains. Add your Netlify URL.
-        
-## Learn More about Next.js
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Video Walkthrough of TaskBlaster[
+https://www.loom.com/share/995a826bda1f40449249a71bb78b5fe6
+
+## Relevant Links
+- [Check out the deployed site](https://taskblaster.netlify.app/)
+- [ERD](https://dbdiagram.io/d/TaskBlaster-erd-link)
+- [Project Board](https://github.com/users/dinnerdoggy/projects/2/views/1)
+- [Backend Repo](https://github.com/dinnerdoggy/TaskBlaster)
+
+## Contributers
+
+- [Casey Cunningham](https://github.com/dinnerdoggy)
