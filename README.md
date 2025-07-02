@@ -1,4 +1,4 @@
-# TaskBlaster [![Netlify Status](https://api.netlify.com/api/v1/badges/YOUR-NETLIFY-BADGE/deploy-status)](https://app.netlify.com/sites/YOUR-NETLIFY-SITE/deploys)
+# TaskBlaster [![Netlify Status](https://api.netlify.com/api/v1/badges/ef7ea90e-e6eb-497f-825d-71f3806fa521/deploy-status)](https://app.netlify.com/projects/taskblaster/deploys)
 
 ## Overview
 TaskBlaster is a clean, user-focused to-do app built with React, Next.js, C#, .NET, Entity Framework Core, and PostGresSQL. Users can securely log in with Firebase Authentication, organize their Tasks by category and priority, manage resources and comments (sticky notes), and get stuff done—fast.
@@ -16,8 +16,7 @@ TaskBlaster is a clean, user-focused to-do app built with React, Next.js, C#, .N
 - **Delete Tasks**: Remove Tasks that are no longer needed.
 - **Category Management**: Add, edit, and delete categories to keep your tasks organized.
 - **Resource Management**: Link reusable resources (like guides, docs, links) to tasks.
-- **Comment System**: Add thoughts or context to any duty.
-- **Dark Mode**: Toggle a persistent dark mode across the app.
+- **Comment System**: Add thoughts or context to any task.
 - Categories, tasks, comments, and resources can all be created, edited, and deleted.
 
 ## Screenshots
@@ -40,7 +39,7 @@ TaskBlaster is a clean, user-focused to-do app built with React, Next.js, C#, .N
 
 
 
-## Video Walkthrough of TaskBlaster[
+## Video Walkthrough of TaskBlaster
 https://www.loom.com/share/995a826bda1f40449249a71bb78b5fe6
 
 ## Relevant Links
