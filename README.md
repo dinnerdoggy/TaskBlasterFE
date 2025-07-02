@@ -45,8 +45,7 @@ https://www.loom.com/share/995a826bda1f40449249a71bb78b5fe6
 
 ## Relevant Links
 - [Check out the deployed site](https://taskblaster.netlify.app/)
-- [ERD](https://dbdiagram.io/d/TaskBlaster-erd-link)
-- [Project Board](https://github.com/users/dinnerdoggy/projects/2/views/1)
+- [ERD](https://drawsql.app/teams/nss-49/diagrams/manage-tasker)
 - [Backend Repo](https://github.com/dinnerdoggy/TaskBlaster)
 
 ## Contributers
